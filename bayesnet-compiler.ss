@@ -1,7 +1,7 @@
 #!r6rs
 
 ;; assumptions:
-;; - in (flip p), p is fixed number
+;; - in (flip p), p is a fixed number
 ;; - all functions are curried
 ;; - all variables are bound
 
