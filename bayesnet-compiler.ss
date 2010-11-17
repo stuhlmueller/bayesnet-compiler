@@ -48,9 +48,9 @@
 (define (lookup env e)
   (cdr (assoc e env)))
 
-(define/curry (compile-apply env arg-node opt-clos)
+(define/curry (compile-apply arg-node opt-clos)
   (compile (clos-body opt-clos)
-           (bind env (clos-arg opt-clos) arg-node)))
+           (bind (clos-env opt-clos) (clos-arg opt-clos) (node-id arg-node))))
 
 (define (compile e env)
   (define make-cpt
@@ -72,13 +72,13 @@
       (let* ([opt-node (compile opt env)]
              [arg-node (compile arg env)]
              [opt-closures (node-values opt-node)]
-             [apply-nodes (map (compile-apply env arg-node) opt-closures)])
+             [apply-nodes (map (compile-apply arg-node) opt-closures)])
         (map (lambda (opt-clos apply-node)
                `(,(node-id apply-node) . (equal? ,(node-id opt-node) ,opt-clos)))
              opt-closures
              apply-nodes))]
      [sym
-      `([,(node-id (lookup env e)) . 1.0])]))
+      `([,(lookup env e) . 1.0])]))
   (let ([node (make-id-node e (make-cpt e))])
     (set! nodes (cons node nodes))
     node))
@@ -104,4 +104,4 @@
   (compile e '())
   (map print-node nodes))
 
-(bayesnet-compiler '((if (flip .2) (lambda x (if (flip .4) x #f)) (lambda y #t)) (flip .3)))
+(bayesnet-compiler '(((lambda e (if (flip .2) (lambda x (if (flip .4) x #f)) (lambda y e))) (flip .7)) (flip .3)))
