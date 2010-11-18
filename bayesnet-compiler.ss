@@ -13,11 +13,7 @@
 
 (define-record-type node (fields id name cpt))
 
-(define s 0)
-
-(define (sym)
-  (set! s (+ s 1))
-  (string->symbol (string-append "s" (number->string s))))
+(define sym (symbol-maker 's))
 
 (define (make-id-node name cpt)
   (make-node (sym) name cpt))
