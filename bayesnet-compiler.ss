@@ -6,12 +6,8 @@
 ;; - all variables are bound
 
 (import (rnrs)
-        (only (srfi :1) delete-duplicates)
-        (only (ikarus) pretty-print gensym)
-        (only (rnrs r5rs) delay force)
-        (only (xitomatl curry) define/curry)
-        (only (xitomatl control) compose)
-        (only (xitomatl match) match-lambda))
+        (scheme-tools)
+        (only (srfi :1) delete-duplicates))
 
 (define-record-type clos (fields arg body env))
 

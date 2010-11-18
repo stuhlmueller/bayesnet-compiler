@@ -3,5 +3,5 @@
 Requires:
 
 * [ikarus scheme](http://ikarus-scheme.org/)
-* [xitomatl library](https://code.launchpad.net/~derick-eddington/scheme-libraries/xitomatl)
+* [scheme tools](https://github.com/stuhlmueller/scheme-tools)
 * [srfi library](https://code.launchpad.net/~scheme-libraries-team/scheme-libraries/srfi)
